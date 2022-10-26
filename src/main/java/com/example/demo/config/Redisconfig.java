@@ -1,0 +1,52 @@
+package com.example.demo.config;
+
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.PropertyAccessor;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.jsontype.impl.LaissezFaireSubTypeValidator;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.data.redis.connection.RedisConnectionFactory;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
+import org.springframework.data.redis.serializer.StringRedisSerializer;
+
+import java.net.UnknownHostException;
+
+@Configuration
+@Slf4j
+public class Redisconfig {
+
+    @Bean
+    public RedisTemplate<String, Object> redisTemplate(RedisConnectionFactory factory)
+            throws UnknownHostException {
+        RedisTemplate<String, Object> redisTemplate = new RedisTemplate<>();
+        redisTemplate.setConnectionFactory(factory);
+
+        //Json序列化配置
+        Jackson2JsonRedisSerializer jackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer(Object.class);
+        ObjectMapper om = new ObjectMapper();
+        //指定要序列化的域，field,get和set，以及修饰符范围，ANY是都有，包括private和public
+        om.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);
+        //指定序列化输入的类型，类必须是非final修饰的，final修饰的类，比如String，Integer等会抛出异常
+        om.activateDefaultTyping(LaissezFaireSubTypeValidator.instance, ObjectMapper.DefaultTyping.NON_FINAL);
+        jackson2JsonRedisSerializer.setObjectMapper(om);
+
+        //配置具体的序列化方式
+        StringRedisSerializer stringRedisSerializer = new StringRedisSerializer();
+
+        //key采用String的序列化方式
+        redisTemplate.setKeySerializer(stringRedisSerializer);
+
+        //hash的key也采用String的序列化方式
+        redisTemplate.setHashKeySerializer(stringRedisSerializer);
+
+        //value序列化采用jackson
+        redisTemplate.setValueSerializer(jackson2JsonRedisSerializer);
+        redisTemplate.setHashValueSerializer(jackson2JsonRedisSerializer);
+        redisTemplate.afterPropertiesSet();
+
+        return  redisTemplate;
+    }
+}
