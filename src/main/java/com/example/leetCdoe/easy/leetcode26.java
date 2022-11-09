@@ -15,6 +15,7 @@ public class leetcode26 {
     public static void main(String[] args) {
         int[] nums = new int[]{0,0,1,1,1,2,2,3,3,4};
         //int num = removeDuplicates(nums);
+
     }
     public int removeDuplicates(int[] nums) {
         if(nums.length <1 ||nums ==null){
