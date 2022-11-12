@@ -1,7 +1,6 @@
 package com.example.demo.question;
 
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.util.concurrent.*;
 
 /**
  * @Author LiuJixue
@@ -15,6 +14,29 @@ import java.util.concurrent.Executors;
  */
 public class MyThreadPoolDemo {
     public static void main(String[] args) {
+        //threadPoolInt();
+        System.out.println(Runtime.getRuntime().availableProcessors());
+        ExecutorService threadPool = new ThreadPoolExecutor(2,
+                5,
+                1L,
+                TimeUnit.SECONDS,
+                new LinkedBlockingDeque<>(3),
+                Executors.defaultThreadFactory(),
+                new ThreadPoolExecutor.CallerRunsPolicy());
+        try {
+            for (int i = 1; i <= 10; i++) {
+                threadPool.execute(()->{
+                    System.out.println(Thread.currentThread().getName() + "\t 办理业务");
+                });
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            threadPool.shutdown();
+        }
+    }
+
+    private static void threadPoolInt() {
         //ExecutorService threadPool = Executors.newFixedThreadPool(5);// 一池5个处理线程
         //ExecutorService threadPool = Executors.newSingleThreadExecutor(); // 1池1个处理线程
         ExecutorService threadPool = Executors.newCachedThreadPool(); // 一个池子n个线程
@@ -30,6 +52,5 @@ public class MyThreadPoolDemo {
         }finally {
             threadPool.shutdown();
         }
-
     }
 }
