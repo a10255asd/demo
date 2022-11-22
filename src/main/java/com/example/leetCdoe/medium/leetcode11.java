@@ -10,5 +10,15 @@ package com.example.leetCdoe.medium;
  */
 public class leetcode11 {
     //11. 盛最多水的容器
-    
+    public int maxArea(int[] height) {
+        int max = 0;
+        int start = 0;
+        int end = height.length-1;
+        while(start<end){
+            max = height[start]<height[end]?
+                    Math.max(max,(end-start)*height[start++])
+                    :Math.max(max,(end-start)*height[end--]);
+        }
+        return max;
+    }
 }
