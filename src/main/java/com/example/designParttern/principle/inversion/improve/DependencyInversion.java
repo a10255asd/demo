@@ -1,4 +1,7 @@
-package com.example.designParttern.inversion.improve;
+package com.example.designParttern.principle.inversion.improve;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @Author LiuJixue
@@ -14,6 +17,7 @@ public class DependencyInversion {
         Person person = new Person();
         person.receive(new Email());
         person.receive(new WeiXin());
+        List<String> list = new ArrayList<>();
     }
 }
 // 定义一个接口
@@ -30,6 +34,7 @@ class WeiXin implements IReceiver{
     @Override
     public String getInfo() {
         return "微信信息：Hello World";
+
     }
 }
 class Person{

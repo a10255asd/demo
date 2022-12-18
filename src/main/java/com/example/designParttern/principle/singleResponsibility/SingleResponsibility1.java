@@ -1,4 +1,4 @@
-package com.example.designParttern.singleResponsibility;
+package com.example.designParttern.principle.singleResponsibility;
 
 /**
  * @Author LiuJixue

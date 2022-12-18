@@ -29,9 +29,9 @@ public class parseFSN {
 
     public static void main(String[] args) {
         Map<String, Map<String, String>> currFileMap =
-                parseLogFile("/Users/LIU/Library/Containers/com.tencent.xinWeChat/Data/Library/Application Support/com.tencent.xinWeChat/2.0b4.0.9/9b622d71f8b0c111811375fa23463cf2/Message/MessageTemp/8efda25b0e0af27f8b6b8b7d6e8e089d/OpenData/20221129R9000005.LOG");
+                parseLogFile("/Users/LIU/Documents/20221213R2000266.LOG");
         parseFSNFile("R9000005", "20221130",
-                "/Users/LIU/Library/Containers/com.tencent.xinWeChat/Data/Library/Application Support/com.tencent.xinWeChat/2.0b4.0.9/9b622d71f8b0c111811375fa23463cf2/Message/MessageTemp/8efda25b0e0af27f8b6b8b7d6e8e089d/OpenData/20221129R9000005.FSN",
+                "/Users/LIU/Documents/20221213R2000266.FSN",
                 currFileMap);
     }
 

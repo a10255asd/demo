@@ -1,4 +1,4 @@
-package com.example.designParttern.inversion;
+package com.example.designParttern.principle.inversion;
 
 /**
  * @Author LiuJixue
