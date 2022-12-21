@@ -28,10 +28,11 @@ public class parseFSN {
     private static String imgPath;
 
     public static void main(String[] args) {
-        Map<String, Map<String, String>> currFileMap =
-                parseLogFile("/Users/LIU/Documents/20221213R2000266.LOG");
+//        Map<String, Map<String, String>> currFileMap =
+//                parseLogFile("/Users/LIU/Documents/20221213R2000266.LOG");
+        Map<String, Map<String, String>> currFileMap = null;
         parseFSNFile("R9000005", "20221130",
-                "/Users/LIU/Documents/20221213R2000266.FSN",
+                "H:/BQD19_ZJOL_0218A80259014000000000120221221084944.FSN",
                 currFileMap);
     }
 
@@ -166,7 +167,7 @@ public class parseFSN {
 //                setterMap.put("error_CODE1", errorCode[0]);
 //                setterMap.put("error_CODE2", errorCode[1]);
 //                setterMap.put("error_CODE3", errorCode[2]);
-                Map<String, String> temp = currFileMap.get(formatDate
+                /*Map<String, String> temp = currFileMap.get(formatDate
                         + formatTime + SNo);
                 if (temp != null) {
                     setterMap.put("TRANTYPE", temp.get("TRANTYPE"));
@@ -179,7 +180,7 @@ public class parseFSN {
                     setterMap.put("SYSJNLNO", "");
                     setterMap.put("TRANSAMOUNT", "");
                 }
-                setterList.add(setterMap);
+                setterList.add(setterMap);*/
 
             }
             System.out.println("失败的冠字号是：" + errFSN.toString());
